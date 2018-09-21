@@ -1,7 +1,7 @@
 # algos
 
-| Tree  | Done |
-| - | - |
-| Fenwick |   |
-| Segment |   |
-| Suffix  |   |
+| Tree  |
+| - |
+| Fenwick |
+| Segment |
+| Suffix  |
