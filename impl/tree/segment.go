@@ -24,10 +24,7 @@ func NewSegmentTree(arr []interface{}, comp Comp) *SegmentTree {
 		comp,
 		len(arr),
 	}
-
-	log.Printf("%#v", arr)
 	tree.build(arr, 0, 0, tree.len-1)
-	log.Printf("%#v", tree.tree)
 
 	return tree
 }
