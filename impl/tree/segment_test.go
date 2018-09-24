@@ -46,6 +46,14 @@ func TestSegmentTree(t *testing.T) {
 			},
 		},
 		{
+			[]interface{}{5},
+			sum,
+			[]query{
+				{0, 0, 5},
+				{0, 2, 5},
+			},
+		},
+		{
 			[]interface{}{69, 89, 96, 38, 59, 42},
 			min,
 			[]query{
