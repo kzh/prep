@@ -1,6 +1,7 @@
 package tree
 
 import (
+	"log"
 	"testing"
 )
 
@@ -11,5 +12,7 @@ func TestSegmentTree(t *testing.T) {
 		return ax + bx
 	}
 
-	NewSegmentTree(arr, min)
+	tree := NewSegmentTree(arr, min)
+	res := tree.Query(0, 1)
+	log.Println(res)
 }
