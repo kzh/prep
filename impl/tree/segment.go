@@ -26,36 +26,48 @@ func NewSegmentTree(arr []interface{}, comp Comp) *SegmentTree {
 	}
 
 	log.Printf("%#v", arr)
-	tree.build(arr, 0, 0, len(arr)-1)
+	tree.build(arr, 0, 0, tree.len-1)
 	log.Printf("%#v", tree.tree)
 
 	return tree
 }
 
 func (seg *SegmentTree) build(arr []interface{}, node, start, end int) {
-	log.Printf("%d %d %d \n", node, start, end)
 	if start == end {
 		seg.tree[node] = arr[start]
-	} else {
-		mid := (start + end) / 2
-		seg.build(arr, 2*node+1, start, mid)
-		seg.build(arr, 2*node+2, mid+1, end)
-		seg.tree[node] = seg.comp(seg.tree[2*node+1], seg.tree[2*node+2])
+		return
 	}
 
-	log.Printf("Set %d to %#v\n", node, seg.tree[node])
+	mid := (start + end) / 2
+	seg.build(arr, 2*node+1, start, mid)
+	seg.build(arr, 2*node+2, mid+1, end)
+	seg.tree[node] = seg.comp(seg.tree[2*node+1], seg.tree[2*node+2])
+}
+
+func (seg *SegmentTree) Print() {
+	seg.print(0, 0, seg.len-1)
+}
+
+func (seg *SegmentTree) print(node, start, end int) {
+	log.Printf(
+		"Node: %d Value: %d Range: %d-%d\n",
+		node, seg.tree[node], start, end,
+	)
+
+	if start == end {
+		return
+	}
+
+	mid := (start + end) / 2
+	seg.print(2*node+1, start, mid)
+	seg.print(2*node+2, mid+1, end)
 }
 
 func (seg *SegmentTree) Query(start, end int) interface{} {
-	return seg.query(0, 0, seg.len, start, end)
+	return seg.query(0, 0, seg.len-1, start, end)
 }
 
 func (seg *SegmentTree) query(node, left, right, start, end int) interface{} {
-	log.Printf(
-		"Node: %d, Val: %#v, Left: %d, Right: %d, Start: %d, End: %d",
-		node, seg.tree[node], left, right, start, end,
-	)
-
 	if start <= left && end >= right {
 		return seg.tree[node]
 	} else if start > right || end < left {

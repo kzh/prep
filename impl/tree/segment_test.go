@@ -13,6 +13,8 @@ func TestSegmentTree(t *testing.T) {
 	}
 
 	tree := NewSegmentTree(arr, min)
-	res := tree.Query(0, 1)
+	tree.Print()
+
+	res := tree.Query(0, 6)
 	log.Println(res)
 }
