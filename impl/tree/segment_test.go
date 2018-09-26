@@ -25,7 +25,14 @@ func max(a interface{}, b interface{}) interface{} {
 	return bx
 }
 
-func TestSegmentTree(t *testing.T) {
+func modify(delta int) Mutate {
+	return func(num interface{}) interface{} {
+		x := num.(int)
+		return x + delta
+	}
+}
+
+func TestSegmentTreeQuery(t *testing.T) {
 	type query struct {
 		start, end int
 		res        interface{}
@@ -87,4 +94,13 @@ func TestSegmentTree(t *testing.T) {
 			}
 		}
 	}
+}
+
+func TestSegmentTreeUpdate(t *testing.T) {
+	tree := NewSegmentTree([]interface{}{1, 2, 3}, sum)
+	tree.Update(0, 1, func(a interface{}) interface{} {
+		ax := a.(int)
+		return ax + 5
+	})
+	tree.Print()
 }
