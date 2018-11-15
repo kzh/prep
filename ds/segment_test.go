@@ -97,7 +97,7 @@ func TestSegmentTreeQuery(t *testing.T) {
 }
 
 func TestSegmentTreeUpdate(t *testing.T) {
-	tree := NewSegmentTree([]interface{}{1, 2, 3}, sum)
+	tree := NewSegmentTree([]interface{}{1, 2, 3}, min)
 	tree.Update(0, 1, func(a interface{}) interface{} {
 		ax := a.(int)
 		return ax + 5
